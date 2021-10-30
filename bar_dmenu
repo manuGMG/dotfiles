@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Blocks file.
+blocks_file=~/.user/.blocks
+
+# Delete block if it is already added,
+# else add it.
+set () {
+	blocks=$(cat $blocks_file)
+	grep -q "$1" <<< $blocks && sed -i "/$1/d" $blocks_file && return
+	echo "$1" >> $blocks_file
+}
+
+# dmenu options.
+menu () {
+	opt="date\nclock\ncpu\nram\nvolume"
+	sel=$(echo -e $opt | dmenu)
+	grep -q "$sel" <<< $opt && set $sel # validate opt
+}
+
+menu

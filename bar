@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Read current blocks file.
+blocks_file=~/.user/.blocks
+[ ! -f "$blocks_file" ] && echo "[bar.sh] Creating: $blocks_file" && touch $blocks_file
+
+# Run once.
+pidof -o %PPID -x $0 >/dev/null && echo "[bar.sh] Already running." && exit 1
+
+# Date.
+status_date () {
+	echo -n "$(date '+^b#81a2be^ [ %b %d]') "
+}
+
+# Clock.
+status_clock () {
+	echo -n "$(date '+^b#b294bb^ [ %H:%M]') "
+}
+
+# CPU Usage.
+status_cpu () {
+	grep 'cpu ' /proc/stat | \
+		awk '{x=($2+$4)*100/($2+$4+$5)} END \
+		{printf "^b#f0c674^ [ %.1f%] ", x}'
+}
+
+# RAM Usage.
+status_ram () {
+	free -m | awk 'NR==2{printf "^b#8abeb7^ [ %sM] ", $3}'
+}
+
+# Volume. [dep: alsa-utils]
+status_volume () {
+	awk -F"[][]" '/Left:/ { printf "^b#b5bd68^ [ %s] ", $2 }' <(amixer sget Master)
+}
+
+# Status loop.
+while true 
+do
+	# Append blocks.
+	blocks=$(cat "$blocks_file")
+	status=""
+	grep -q "date" <<< "$blocks" && status=$status$(status_date)
+	grep -q "clock" <<< "$blocks" && status=$status$(status_clock)
+	grep -q "cpu" <<< "$blocks" && status=$status$(status_cpu)
+	grep -q "ram" <<< "$blocks" && status=$status$(status_ram)
+	grep -q "volume" <<< "$blocks" && status=$status$(status_volume)
+
+	# Set status bar.
+	xsetroot -name "^c#373b41^$status"
+	sleep 1
+done
