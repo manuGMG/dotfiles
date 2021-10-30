@@ -8,7 +8,7 @@ blocks_file=~/.user/.blocks
 set () {
 	blocks=$(cat $blocks_file)
 	grep -q "$1" <<< $blocks && sed -i "/$1/d" $blocks_file && return
-	echo "$1" >> $blocks_file
+	echo -e "$1" >> $blocks_file
 }
 
 # dmenu options.
