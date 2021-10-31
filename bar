@@ -4,9 +4,6 @@
 blocks_file=~/.user/.blocks
 [ ! -f "$blocks_file" ] && echo "[bar.sh] Creating: $blocks_file" && touch $blocks_file
 
-# Run once.
-pidof -o %PPID -x $0 >/dev/null && echo "[bar.sh] Already running." && exit 1
-
 # Date.
 status_date () {
 	echo -n "$(date '+^b#81a2be^ [ %b %d]') "
@@ -17,11 +14,9 @@ status_clock () {
 	echo -n "$(date '+^b#b294bb^ [ %H:%M]') "
 }
 
-# CPU Usage.
+# CPU Average Load.
 status_cpu () {
-	grep 'cpu ' /proc/stat | \
-		awk '{x=($2+$4)*100/($2+$4+$5)} END \
-		{printf "^b#f0c674^ [ %.1f%] ", x}'
+	echo -n "^b#f0c674^ [ $(cut -d " " -f 1 /proc/loadavg)] "
 }
 
 # RAM Usage.

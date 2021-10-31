@@ -6,7 +6,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fira Code Regular:size=10:style=Regular:antialias=true", "Font Awesome 5 Free Solid:size=10:style=Solid:antialias=true" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char dmenufont[]       = "Fira Code Regular:size=8:style=Regular:antialias=true";
 static const char col_gray1[]       = "#373b41";
 static const char col_gray2[]       = "#475264";
 static const char col_gray3[]       = "#c5c8c6";
@@ -19,7 +19,13 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "" };
+static const char *tags[] = { "1", "2", "3", "4" };
+
+/* underlinetags patch */
+static const unsigned int ulinepad     = 8;
+static const unsigned int ulinestroke  = 1;
+static const unsigned int ulinevoffset = 0;
+static const int ulineall              = 0;
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -27,8 +33,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Chromium",     NULL,       NULL,       1,            0,           -1 }
 };
 
 /* layout(s) */
@@ -39,9 +44,9 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
+	{ "",      monocle },
 };
 
 /* key definitions */

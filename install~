@@ -1,0 +1,25 @@
+###############################
+# install.sh                  #
+# github.com/manuGMG/dotfiles #
+###############################
+
+# Check for root privileges ###
+[ $EUID != 0 ] && echo "Run as root." && exit 1
+
+# Install packages & deps   ###
+sudo xbps-install -Su -y
+
+# Copy .user (scripts) folder #
+mkdir ~/.user
+cp -r dmenu/ ~/.user/
+cp -r dwm/ ~/.user/
+cp bar ~/.user/
+cp bar_dmenu ~/.user/
+
+# Copy configuration files ####
+cp .xinitrc ~/
+cp .bashrc ~/
+cp .alacritty.yml ~/
+
+# Copy font files #############
+cp -r fonts/ ~/.fonts/
