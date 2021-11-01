@@ -7,10 +7,15 @@
 [ $EUID != 0 ] && echo "Run as root." && exit 1
 
 # Install dependencies ########
-sudo xbps-install -Su -y gcc make
+sudo xbps-install -Su
+sudo xbps-install -Su -y gcc make libX11-devel libXft-devel libXinerama-devel
 
 # Install packages     ########
 sudo xbps-install -Su -y alacritty nvim patch
+
+# Compile dwm and dmenu #######
+sudo make install -C dwm/
+sudo make install -C dmenu/
 
 # Copy .user (scripts) folder #
 mkdir ~/.user
@@ -24,6 +29,7 @@ cp .xinitrc ~/
 cp .bashrc ~/
 cp .bash_profile ~/
 cp .alacritty.yml ~/
+cp -r .config/ ~/
 
 # Copy font files #############
 cp -r fonts/ ~/.fonts/
