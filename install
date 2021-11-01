@@ -18,20 +18,22 @@ sudo make install -C dmenu/
 
 # Copy .user (scripts) folder #
 mkdir $USER_HOME/.user
-cp -r dmenu/ $USER_HOME/.user/
-cp -r dwm/ $USER_HOME/.user/
-cp bar $USER_HOME/.user/
-cp bar_dmenu $USER_HOME/.user/
+cp -rp dmenu/ $USER_HOME/.user/
+cp -rp dwm/ $USER_HOME/.user/
+cp -p bar $USER_HOME/.user/
+cp -p bar_dmenu $USER_HOME/.user/
 
 # Copy configuration files ####
-cp .xinitrc $USER_HOME/
-cp .bashrc $USER_HOME/
-cp .bash_profile $USER_HOME/
-cp .alacritty.yml $USER_HOME/
-cp -r .config/ $USER_HOME/
+cp -p .xinitrc $USER_HOME/
+cp -p .bashrc $USER_HOME/
+cp -p .bash_profile $USER_HOME/
+cp -p .alacritty.yml $USER_HOME/
+cp -rp .config/ $USER_HOME/
 
 # Copy font files #############
-cp -r fonts/ $USER_HOME/.fonts/
+cp -rp fonts/ $USER_HOME/.fonts/
 
 # Output ######################
-echo "* => Remember to run :PlugInstall for nvim!"
+echo "* => Done."
+echo "* => Remember to run :PlugInstall for nvim."
+echo "* => "
