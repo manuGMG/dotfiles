@@ -15,6 +15,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 
+	" Fzf
+	Plug 'junegunn/fzf'
+
 call plug#end()
 
 " vim-hybrid 
