@@ -17,7 +17,7 @@ sudo make install -C dwm/
 sudo make install -C dmenu/
 
 # Copy .user (scripts) folder #
-mkdir $USER_HOME/.user
+mkdir -m 777 $USER_HOME/.user
 cp -rp dmenu/ $USER_HOME/.user/
 cp -rp dwm/ $USER_HOME/.user/
 cp -p bar $USER_HOME/.user/
