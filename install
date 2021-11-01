@@ -22,6 +22,10 @@ cp -rp dmenu/ $USER_HOME/.user/
 cp -rp dwm/ $USER_HOME/.user/
 cp -p bar $USER_HOME/.user/
 cp -p bar_dmenu $USER_HOME/.user/
+cp -p .blocks $USER_HOME/.user/
+
+# Copy wallpaper ##############
+cp -p wall.png $USER_HOME/.user/
 
 # Copy configuration files ####
 cp -p .xinitrc $USER_HOME/
