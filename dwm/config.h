@@ -6,12 +6,12 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fira Code Regular:size=10:style=Regular:antialias=true", "Font Awesome 5 Free Solid:size=10:style=Solid:antialias=true" };
-static const char dmenufont[]       = "Fira Code Regular:size=8:style=Regular:antialias=true";
-static const char col_gray1[]       = "#373b41";
-static const char col_gray2[]       = "#475264";
+static const char dmenufont[]       = "Fira Code Regular:size=10:style=Regular:antialias=true";
+static const char col_gray1[]       = "#3a3a3a";
+static const char col_gray2[]       = "#3a3a3a";
 static const char col_gray3[]       = "#c5c8c6";
-static const char col_gray4[]       = "#81a2be";
-static const char col_cyan[]        = "#373b41";
+static const char col_gray4[]       = "#afaf5f";
+static const char col_cyan[]        = "#3a3a3a";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
