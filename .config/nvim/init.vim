@@ -2,6 +2,12 @@
 set number
 set nowrap
 
+" Keybinds
+nmap <C-h> :bp<Enter>
+nmap <C-l> :bn<Enter>
+nmap <C-s> :w<Enter>
+nmap <C-b> :FZF<Enter>
+
 " Vim-plug
 call plug#begin('~/.config/nvim/autoload/plugged')
 
