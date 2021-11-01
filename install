@@ -6,11 +6,9 @@
 # Check for root privileges ###
 [ $EUID != 0 ] && echo "Run as root." && exit 1
 
-# Install dependencies ########
+# Install deps and packages ####
 sudo xbps-install -Su
-sudo xbps-install -Su -y gcc make libX11-devel libXft-devel libXinerama-devel
-
-# Install packages     ########
+sudo xbps-install -Su -y gcc make libX11-devel libXft-devel libXinerama-devel xorg
 sudo xbps-install -Su -y alacritty nvim patch
 
 # Compile dwm and dmenu #######
