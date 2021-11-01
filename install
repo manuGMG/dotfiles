@@ -5,32 +5,33 @@
 
 # Check for root privileges ###
 [ $EUID != 0 ] && echo "Run as root." && exit 1
+USER_HOME=$(getent passwd ${SUDO_USER:-$USER} | cut -d: -f6)
 
 # Install deps and packages ####
-sudo xbps-install -Su
+sudo xbps-install -Su -y
 sudo xbps-install -Su -y gcc make libX11-devel libXft-devel libXinerama-devel xorg
-sudo xbps-install -Su -y alacritty nvim patch
+sudo xbps-install -Su -y alacritty neovim patch
 
 # Compile dwm and dmenu #######
 sudo make install -C dwm/
 sudo make install -C dmenu/
 
 # Copy .user (scripts) folder #
-mkdir ~/.user
-cp -r dmenu/ ~/.user/
-cp -r dwm/ ~/.user/
-cp bar ~/.user/
-cp bar_dmenu ~/.user/
+mkdir $USER_HOME/.user
+cp -r dmenu/ $USER_HOME/.user/
+cp -r dwm/ $USER_HOME/.user/
+cp bar $USER_HOME/.user/
+cp bar_dmenu $USER_HOME/.user/
 
 # Copy configuration files ####
-cp .xinitrc ~/
-cp .bashrc ~/
-cp .bash_profile ~/
-cp .alacritty.yml ~/
-cp -r .config/ ~/
+cp .xinitrc $USER_HOME/
+cp .bashrc $USER_HOME/
+cp .bash_profile $USER_HOME/
+cp .alacritty.yml $USER_HOME/
+cp -r .config/ $USER_HOME/
 
 # Copy font files #############
-cp -r fonts/ ~/.fonts/
+cp -r fonts/ $USER_HOME/.fonts/
 
 # Output ######################
 echo "* => Remember to run :PlugInstall for nvim!"
