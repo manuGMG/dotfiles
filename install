@@ -1,0 +1,45 @@
+###############################
+# install.sh                  #
+# github.com/manuGMG/dotfiles #
+###############################
+# script just for future reference
+
+# Check for root privileges
+[ $EUID != 0 ] && echo "Run as root." && exit 1
+USER_HOME=$(getent passwd ${SUDO_USER:-$USER} | cut -d: -f6)
+
+# Install deps and packages
+sudo xbps-install -Su -y
+sudo xbps-install -Su -y gcc make libX11-devel libXft-devel libXinerama-devel xorg
+sudo xbps-install -Su -y feh alacritty neovim patch fzf picom 
+
+# Compile dwm and dmenu
+sudo make install -C dwm/
+sudo make install -C dmenu/
+
+# Copy .user (scripts) folder
+mkdir -m 777 $USER_HOME/.user
+cp -rp dmenu/ $USER_HOME/.user/
+cp -rp dwm/ $USER_HOME/.user/
+cp -p bar $USER_HOME/.user/
+cp -p bar_dmenu $USER_HOME/.user/
+cp -p .blocks $USER_HOME/.user/
+
+# Copy wallpaper
+cp -p wall.png $USER_HOME/.user/
+
+# Copy configuration files
+cp -p .xinitrc $USER_HOME/
+cp -p .bashrc $USER_HOME/
+cp -p .bash_profile $USER_HOME/
+cp -p .alacritty.yml $USER_HOME/
+cp -rp .config/ $USER_HOME/
+cp -p picom.conf $USER_HOME/.config/
+
+# Copy font files
+cp -rp fonts/ $USER_HOME/.fonts/
+
+# Output
+echo "* => Done."
+echo "* => Remember to run :PlugInstall for nvim."
+echo "* => "
