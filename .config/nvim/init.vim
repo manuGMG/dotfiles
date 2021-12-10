@@ -1,12 +1,16 @@
 " Some defaults
 set number
 set nowrap
+set mouse=a
+set cursorline
+set tabstop=4
 
 " Keybinds
 nmap <C-h> :bp<Enter>
 nmap <C-l> :bn<Enter>
 nmap <C-s> :w<Enter>
-nmap <C-b> :FZF<Enter>
+nmap <C-f> :FZF<Enter>
+nmap <C-x> :bd<Enter>
 
 " Vim-plug
 call plug#begin('~/.config/nvim/autoload/plugged')
@@ -24,9 +28,15 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 	" Fzf
 	Plug 'junegunn/fzf'
 
+	" coc.nvim
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+	" Emmet
+	Plug 'mattn/emmet-vim'
+
 call plug#end()
 
-" vim-hybrid 
+" vim-hybrid
 colorscheme hybrid
 
 " vim-airline
