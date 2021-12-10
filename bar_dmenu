@@ -13,7 +13,7 @@ set () {
 
 # dmenu options.
 menu () {
-	opt="date\nclock\ncpu\nram\nvolume"
+	opt="date\nclock\ncpu\nram\nvolume\nxkb"
 	sel=$(echo -e $opt | dmenu)
 	grep -q "$sel" <<< $opt && set $sel # validate opt
 }
