@@ -24,13 +24,18 @@ status_ram () {
 	free -m | awk 'NR==2{printf "^b#8abeb7^ [ %sM] ", $3}'
 }
 
-# Volume. [dep: alsa-utils]
+# Volume. [dep: pulseaudio-utils]
 status_volume () {
-	awk -F"[][]" '/Left:/ { printf "^b#b5bd68^ [ %s] ", $2 }' <(amixer sget Master)
+	awk -F" / " '/front-left: / { printf "^b#b5bd68^ [ %s] ", $2 }' <(pactl get-sink-volume @DEFAULT_SINK@)	
+}
+
+# Keyboard Layout.
+status_xkb() {
+	echo -n "^b#f0c674^ [ $(setxkbmap -query | awk -F"(,|[ ]+)" '/layout: / { print $2 }')] "
 }
 
 # Status loop.
-while true 
+while true
 do
 	# Append blocks.
 	blocks=$(cat "$blocks_file")
@@ -40,8 +45,9 @@ do
 	grep -q "cpu" <<< "$blocks" && status=$status$(status_cpu)
 	grep -q "ram" <<< "$blocks" && status=$status$(status_ram)
 	grep -q "volume" <<< "$blocks" && status=$status$(status_volume)
+	grep -q "xkb" <<< "$blocks" && status=$status$(status_xkb)
 
 	# Set status bar.
 	xsetroot -name "^c#373b41^$status"
-	sleep 1
+	sleep .5
 done
